@@ -95,7 +95,7 @@ $("list").addEventListener("click",async e=>{
   try{
     if(b.dataset.approve){b.disabled=true;const r=await api("approve",{submission_id:b.dataset.approve});say("Profile created. Pet ID: "+r.pet_id,false);await load();if(r.profile_url)window.prompt("Copy this NFC profile URL and write it to the keychain:",r.profile_url);}
     if(b.dataset.reject){if(!confirm("Reject this customer submission?"))return;b.disabled=true;await api("reject",{submission_id:b.dataset.reject});say("Submission rejected.",false);await load();}
-    if(b.dataset.copy){const url=location.origin+location.pathname+"?pet="+b.dataset.copy;await navigator.clipboard.writeText(url);say("NFC profile link copied: "+url,false);}
+    if(b.dataset.copy){const url="https://manjunathraibagi.github.io/petlink-site/?pet="+b.dataset.copy;await navigator.clipboard.writeText(url);say("NFC profile link copied: "+url,false);}
   }catch(err){say(err.message);b.disabled=false;}
 });
 (async()=>{const {data:{session:s}}=await db.auth.getSession();if(s){session=s;$("login").classList.add("hidden");$("app").classList.remove("hidden");$("logout").classList.remove("hidden");await load();}})();
