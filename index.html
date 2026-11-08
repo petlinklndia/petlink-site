@@ -65,7 +65,42 @@ textarea{min-height:75px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12
 .finder-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .finder-actions a{display:flex;justify-content:center;align-items:center;text-align:center;text-decoration:none;padding:13px 9px;border-radius:12px;background:linear-gradient(110deg,#bd984f,#f0d99d);color:#211a0d;font-size:10px;font-weight:1000}
 .finder-actions a.alt{background:#ffffff08;border:1px solid #e0bf7570;color:#f1dfb6}
-.finder-trigger{width:100%;border:1px solid #e7c77f80;border-radius:13px;padding:15px;background:linear-gradient(110deg,#bd984f,#f0d99d);color:#211a0d;font-size:11px;font-weight:1000;letter-spacing:.07em;cursor:pointer}
+.finder-trigger{
+  display:flex;
+  width:100%;
+  min-height:54px;
+  box-sizing:border-box;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  text-decoration:none;
+  line-height:1.35;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  border:1px solid #f3d995;
+  border-radius:14px;
+  padding:14px 18px;
+  background:linear-gradient(110deg,#bd984f,#f0d99d);
+  color:#211a0d;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.055em;
+  cursor:pointer;
+  box-shadow:0 7px 18px #0003,inset 0 1px #fff5;
+  transition:transform .2s,filter .2s,box-shadow .2s;
+}
+.finder-trigger:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.06);
+  box-shadow:0 10px 22px #0004,inset 0 1px #fff7;
+}
+.finder-trigger:active{transform:scale(.985)}
+@media(max-width:520px){
+  .finder-panel{padding:16px;margin-top:18px}
+  .finder-panel .contact-head{gap:10px;margin-bottom:12px}
+  .finder-panel h2{font-size:21px}
+  .finder-trigger{min-height:56px;padding:13px 14px;font-size:10px;letter-spacing:.045em}
+}
 .age-preview{font-size:11px;color:#c9d9c4;margin-top:7px;min-height:17px}
 .lost{margin:15px 0;padding:16px;border-radius:15px;background:linear-gradient(100deg,#782f25,#3d1b18);border:1px solid #d77963;color:#fff0e8;text-align:center;font-weight:900;letter-spacing:.04em;animation:lostPulse 2s infinite}
 .love-note{position:relative;margin-top:18px;padding:19px 17px;border:1px solid #e0bf7545;border-radius:17px;background:linear-gradient(135deg,#e0bf7517,#ffffff05);text-align:center}
@@ -118,12 +153,12 @@ const photo=p.photo_url?`<img class="hero-photo" src="${esc(p.photo_url)}" alt="
 const phone=p.phone?String(p.phone).replace(/[^\d]/g,""):"";
 const waNumber=phone?(phone.length===10?"91"+phone:phone):"";
 const waLink=waNumber?`<a class="alt" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}">✆ <span>MESSAGE ON WHATSAPP</span></a>`:"";
-app.innerHTML=`<section class="hero">${photo}<div class="hero-top"><span class="glass"><i class="dot"></i> VERIFIED PETLINK PROFILE</span><span class="glass">${esc(type)}</span></div><div class="hero-copy"><div class="eyebrow">SMALL PAWS. BIG LOVE. FOREVER FAMILY.</div><h1 class="pet-name">${esc(p.pet_name||"Pet")}</h1><div class="pet-sub">${esc(p.breed||type)}${p.age_text?" · "+age:""}</div><div class="tap-hint">🐾 Tap my photo to send a little love</div></div></section>
+app.innerHTML=`<section class="hero">${photo}<div class="hero-top"><span class="glass"><i class="dot"></i> VERIFIED PETLINK PROFILE</span><span class="glass">${esc(type)}</span></div><div class="hero-copy"><h1 class="pet-name">${esc(p.pet_name||"Pet")}</h1><div class="pet-sub">${esc(p.breed||type)}${(p.dob||p.age_text)?" · "+age:""}</div><div class="tap-hint">🐾 Tap my photo to send a little love</div></div></section>
 <div class="profile-body"><div class="welcome-strip">A LITTLE TAG. A LOT OF LOVE · PETLINK</div>
 <div class="stats"><div class="stat"><span class="emoji">🐾</span><strong>${esc(p.gender||"Not shared")}</strong><small>Gender</small></div><div class="stat"><span class="emoji">🎂</span><strong>${age}</strong><small>Age</small></div><div class="stat"><span class="emoji">🐶</span><strong>${esc(p.breed||"Not shared")}</strong><small>Breed</small></div></div>
 ${p.is_lost?'<div class="lost">🚨 I MAY BE LOST. PLEASE HELP ME GET HOME. CONTACT MY HUMAN BELOW.</div>':""}
 <div class="section-title"><span class="icon">💛</span> My favourite human</div><div class="info-grid"><div class="info"><small>My person</small><strong>${esc(p.owner_name||"My favourite human")}</strong></div><div class="info"><small>Home city</small><strong>${esc(p.city||"Not shared")}</strong></div></div>
-<section class="finder-panel"><div class="contact-head"><div class="contact-icon">📍</div><div><div class="eyebrow">FOUND ME?</div><h2>Help me get home</h2></div></div>${waLink?`<a class="finder-trigger" id="shareLocation" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}?text=${encodeURIComponent("I found "+(p.pet_name||"your pet")+". I am sharing my location with you now.")}">📍 SHARE YOUR LOCATION WITH MY HUMAN</a>`:`<div class="contact-private">Owner contact has not been enabled for this profile.</div>`}</section>
+<section class="finder-panel"><div class="contact-head"><div class="contact-icon">📍</div><div><div class="eyebrow">FOUND ME?</div><h2>Help me get home</h2></div></div>${waLink?`<a class="finder-trigger" id="shareLocation" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}?text=${encodeURIComponent("I found "+(p.pet_name||"your pet")+". I am sharing my location with you now.")}">📍 SHARE LOCATION WITH MY HUMAN</a>`:`<div class="contact-private">Owner contact has not been enabled for this profile.</div>`}</section>
 ${p.public_medical_notes?`<div class="section-title"><span class="icon">🩺</span> Care notes</div><div class="note">${esc(p.public_medical_notes)}</div>`:""}
 ${p.notes?`<div class="section-title"><span class="icon">✨</span> A little more about me</div><div class="note">${esc(p.notes)}</div>`:""}
 <div class="love-note"><p>“I may only be part of your world, but you're my whole world.”</p><small>A little note from the PetLink family</small></div>
