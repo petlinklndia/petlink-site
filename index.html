@@ -115,7 +115,7 @@ const r=await fetch(SUPABASE_URL+"/functions/v1/view-pet",{method:"POST",headers
 function ageFromDob(value){if(!value)return p.age_text||"Not shared";const birth=new Date(value+"T00:00:00"),today=new Date();if(Number.isNaN(birth.getTime())||birth>today)return "Not shared";let y=today.getFullYear()-birth.getFullYear(),m=today.getMonth()-birth.getMonth(),d=today.getDate()-birth.getDate();if(d<0)m--;if(m<0){y--;m+=12;}if(y===0&&m===0)return "Less than 1 month";return [y?y+"y":"",m?m+"m":""].filter(Boolean).join(" ")||"Less than 1 month";}
 const age=esc(ageFromDob(p.dob)),type=p.animal_type||"Pet";
 const photo=p.photo_url?`<img class="hero-photo" src="${esc(p.photo_url)}" alt="${esc(p.pet_name)}">`:"";
-const phone=p.phone?String(p.phone).replace(/[^\\d]/g,""):"";
+const phone=p.phone?String(p.phone).replace(/[^\d]/g,""):"";
 const waNumber=phone?(phone.length===10?"91"+phone:phone):"";
 const waLink=waNumber?`<a class="alt" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}">✆ <span>MESSAGE ON WHATSAPP</span></a>`:"";
 app.innerHTML=`<section class="hero">${photo}<div class="hero-top"><span class="glass"><i class="dot"></i> VERIFIED PETLINK PROFILE</span><span class="glass">${esc(type)}</span></div><div class="hero-copy"><div class="eyebrow">SMALL PAWS. BIG LOVE. FOREVER FAMILY.</div><h1 class="pet-name">${esc(p.pet_name||"Pet")}</h1><div class="pet-sub">${esc(p.breed||type)}${p.age_text?" · "+age:""}</div><div class="tap-hint">🐾 Tap my photo to send a little love</div></div></section>
