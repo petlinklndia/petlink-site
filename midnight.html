@@ -99,7 +99,7 @@ textarea{min-height:80px;resize:vertical}
  <footer class="foot">A DIGITAL IDENTITY FOR THE ONES WE LOVE · <b>PETLINK</b></footer>
 </main>
 <script>
-const SUPABASE_URL="https://fmjunvojvgtmdqjzaudxm.supabase.co";
+const SUPABASE_URL="https://fmujvoyvgtmdqjzaudxm.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_Fa5O4AiPZWe9_QmlWjcQTQ_RebQBR9F";
 const app=document.getElementById("app");
 const headers={"apikey":SUPABASE_PUBLISHABLE_KEY};
@@ -138,11 +138,11 @@ function showForm(){
 async function showPet(id){
  app.innerHTML='<div class="error">Preparing your pet’s private collection profile…</div>';
  try{
-  const r=await fetch(SUPABASE_URL+"https://fmujvoyvgtmdqjzaudxm.supabase.co",{method:"POST",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({pet_id:id})});
+  const r=await fetch(SUPABASE_URL+"/functions/v1/view-pet",{,{method:"POST",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({pet_id:id})});
   const data=await r.json();if(!r.ok)throw Error(data.error||"This pet profile is not available yet.");
   const p=data.pet||{},age=ageFromDob(p.dob,p.age_text);
-  const phone=p.phone?String(p.phone).replace(/\\D/g,""):"";
-  const wa=p.whatsapp?String(p.whatsapp).replace(/\\D/g,""):phone;
+  const phone=p.phone?String(p.phone).replace(/\D/g,""):"";
+  const wa=p.whatsapp?String(p.whatsapp).replace(/\D/g,""):phone;
   const waNumber=wa?(wa.length===10?"91"+wa:wa):"";
   const waText=encodeURIComponent("Hello, I found "+(p.pet_name||"your pet")+". I am sharing my location with you now.");
   const contact=waNumber?`<a class="contact-action" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}?text=${waText}">↗ &nbsp; Share my location with their human</a>`:`<div class="private">Owner contact has not been enabled for this profile.</div>`;
