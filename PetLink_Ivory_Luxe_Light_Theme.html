@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f4ec">
+<meta name="description" content="Midnight Luxe — a premium digital identity for your beloved pet, powered by PetLink.">
+<title>Ivory Luxe | PetLink</title>
+<style>
+:root{
+  --ink:#0b1020;--navy:#111a30;--navy2:#18243e;--paper:#f4f1e9;
+  --muted:#aeb9cf;--silver:#cbd6e8;--accent:#c6d4ef;--line:#dbe5f322;
+  --gold:#d6bd85;--rose:#d9b4c7;--mint:#a9d8cf;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:
+ radial-gradient(ellipse at 8% 8%,#263a60 0,transparent 34%),
+ radial-gradient(ellipse at 92% 40%,#1d2944 0,transparent 35%),#080d19;
+ color:var(--paper);font-family:Inter,"Avenir Next",system-ui,sans-serif}
+button,input,select,textarea{font:inherit}
+.shell{max-width:1120px;margin:auto;padding:28px 24px 36px}
+.masthead{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 25px}
+.wordmark{font-size:14px;letter-spacing:.32em;font-weight:900;color:#f5f2eb}
+.wordmark span{color:var(--gold)}
+.edition{font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:#aebbd2}
+.card{border:1px solid #dbe5f32b;border-radius:28px;overflow:hidden;background:linear-gradient(145deg,#121d34f2,#0b1223f5);box-shadow:0 35px 100px #0009;min-height:220px}
+.profile{padding:28px}
+.kicker{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:800}
+.profile-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);gap:28px;align-items:stretch}
+.visual{position:relative;min-height:590px;border-radius:22px;overflow:hidden;background:linear-gradient(145deg,#314768,#111a30)}
+.visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.visual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#07101b22 15%,#07101b08 42%,#07101be8 100%);pointer-events:none}
+.photo-label{position:absolute;z-index:1;top:18px;left:18px;padding:10px 13px;border:1px solid #ffffff55;border-radius:99px;background:#0b102088;backdrop-filter:blur(12px);font-size:9px;letter-spacing:.15em;text-transform:uppercase}
+.visual-caption{position:absolute;z-index:1;left:28px;right:28px;bottom:28px}
+.visual-caption .overline{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#e5d2a9}
+.visual-caption h1{font:400 clamp(48px,7vw,82px)/.95 Georgia,serif;letter-spacing:-.045em;margin:12px 0;color:#fffaf0;overflow-wrap:anywhere}
+.visual-caption p{margin:0;color:#e3e8f1;font-size:13px;letter-spacing:.08em}
+.details{display:flex;flex-direction:column;padding:7px 4px 4px;min-width:0}
+.serial{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:17px;border-bottom:1px solid var(--line)}
+.serial span:last-child{color:var(--muted);font-size:9px;letter-spacing:.17em;text-transform:uppercase;text-align:right}
+.identity{padding:25px 0 20px}
+.identity h2{font:400 34px/1.08 Georgia,serif;margin:10px 0 8px;color:#f7f2e8}
+.identity p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:4px 0 22px}
+.fact{padding:15px 14px;border:1px solid var(--line);border-radius:14px;background:#ffffff07;min-width:0}
+.fact small,.owner-box small{display:block;color:#9eacc5;font-size:8px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;font-weight:800}
+.fact strong{font-size:13px;color:#f2f3f5;overflow-wrap:anywhere}
+.owner-box{padding:17px;border:1px solid #d6bd8555;border-radius:16px;background:linear-gradient(140deg,#d6bd8518,#ffffff04);margin-top:auto}
+.owner-box .owner-name{font:24px Georgia,serif;color:#f7efdc;margin:0 0 5px;overflow-wrap:anywhere}
+.owner-box .city{font-size:12px;color:var(--muted);margin:0}
+.lost{margin:0 0 17px;padding:13px 15px;border-radius:12px;background:#612b36;border:1px solid #d98c9b;color:#fff0f2;font-size:11px;font-weight:850;letter-spacing:.08em}
+.contact{margin-top:26px;padding:23px;border:1px solid #d6bd8566;border-radius:20px;background:linear-gradient(120deg,#d6bd8518,#ffffff05)}
+.contact-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.contact h2{font:30px Georgia,serif;margin:8px 0 4px}
+.contact .sub{font-size:12px;color:var(--muted);margin:0;line-height:1.6}
+.contact-action{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;margin-top:19px;padding:16px 20px;border-radius:12px;background:linear-gradient(110deg,#b9c9e8,#edf2fc);color:#111a2c;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;transition:transform .2s,filter .2s;text-align:center}
+.contact-action:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.private{margin-top:18px;padding:14px;border-radius:12px;background:#ffffff08;border:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6}
+.extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.extra{padding:18px;border:1px solid var(--line);border-radius:16px;background:#ffffff06;min-width:0}
+.extra h3{font:20px Georgia,serif;margin:0 0 10px;color:#eee8da}
+.extra p{margin:0;color:#bdc7d8;font-size:12px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.bottomline{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:24px;padding-top:19px;border-top:1px solid var(--line)}
+.signature{font:italic 17px Georgia,serif;color:#d9d4c8}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tool{border:1px solid #dbe5f344;background:#ffffff08;color:#dce5f5;padding:10px 13px;border-radius:99px;font-size:10px;cursor:pointer}
+.tool:focus-visible,.contact-action:focus-visible,.submit:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.foot{text-align:center;margin-top:21px;color:#7f8da7;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+.foot b{color:var(--gold)}
+/* Submission form */
+.form-wrap{max-width:650px;margin:auto;padding:35px}
+.form-wrap h1{font:400 40px Georgia,serif;margin:12px 0}
+.form-wrap .intro{font-size:13px;line-height:1.7;color:var(--muted)}
+label{display:block;margin:15px 0 7px;color:#d8e1f0;font-size:11px}
+input,select,textarea{width:100%;padding:13px;border-radius:10px;border:1px solid #536786;background:#0b1425;color:#f5f8ff}
+textarea{min-height:80px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.consent{display:flex;gap:10px;align-items:flex-start;color:#bdc8dc;font-size:11px;line-height:1.6;margin-top:14px}
+.consent input{width:auto;margin-top:3px;flex:none}
+.submit{width:100%;border:0;border-radius:11px;padding:15px;margin-top:20px;background:linear-gradient(110deg,#8199bf,#dce6f7);color:#101a2b;font-size:11px;font-weight:900;letter-spacing:.1em;cursor:pointer}
+.submit:disabled{opacity:.65;cursor:wait}
+.msg{margin-top:14px;color:#e8d5a8;font-size:12px;line-height:1.6}
+.age-preview{font-size:10px;color:#a9d8cf;margin-top:6px;min-height:15px}
+.error{padding:45px;text-align:center;color:var(--muted)}
+.error h1{font:34px Georgia,serif;color:#f4f1e9;margin:0 0 12px}
+.error p{font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.loading{padding:42px;text-align:center;color:var(--muted);font-size:13px;letter-spacing:.04em}
+@media(max-width:760px){
+ .shell{padding:17px 12px 25px}.masthead{padding:5px 3px 17px;gap:12px}
+ .profile{padding:13px}.profile-grid{grid-template-columns:1fr;gap:17px}
+ .visual{min-height:450px}.details{padding:8px 7px 5px}
+ .identity{padding:19px 0 15px}.identity h2{font-size:30px}
+ .contact{padding:18px}.contact h2{font-size:26px}
+ .bottomline{align-items:flex-start;flex-direction:column}
+ .form-wrap{padding:23px 18px}.form-grid{grid-template-columns:1fr}
+ .extra-grid{grid-template-columns:1fr}
+}
+@media(max-width:420px){.edition{font-size:8px;letter-spacing:.12em;text-align:right}.serial{align-items:flex-start;flex-direction:column}.serial span:last-child{text-align:left}.visual{min-height:400px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+<style id="petlink-ivory-light-theme">
+:root{
+ --ink:#f7f4ec;--navy:#fffdf8;--navy2:#f0ece2;--paper:#263329;
+ --muted:#687568;--silver:#647267;--accent:#526b58;--line:#53665324;
+ --gold:#a98445;--rose:#c58e91;--mint:#71947d;
+}
+body{background:radial-gradient(ellipse at 8% 8%,#e8eadf 0,transparent 36%),radial-gradient(ellipse at 92% 40%,#f0e6d9 0,transparent 38%),#f7f4ec;color:#263329}
+.wordmark{color:#263329}.wordmark span{color:#a98445}
+.edition{color:#788477}
+.card{border-color:#d9d4c7;background:linear-gradient(145deg,#fffefa,#f5f1e8);box-shadow:0 28px 75px #4a51301c}
+.kicker{color:#98743b}
+.identity h2,.contact h2{color:#29382d}
+.identity p,.contact .sub{color:#69766a}
+.fact{border-color:#dfe2d7;background:#ffffffa8}
+.fact small,.owner-box small{color:#7a8779}
+.fact strong{color:#2d3a30}
+.owner-box{border-color:#d9c69f;background:linear-gradient(140deg,#efe5cf,#fffdf8)}
+.owner-box .owner-name{color:#344337}.owner-box .city{color:#748074}
+.contact{border-color:#d9c69f;background:linear-gradient(120deg,#f2ead9,#fffdf8)}
+.contact-action,.submit{background:linear-gradient(110deg,#9e7c43,#d9c18e);color:#fffdf7}
+.private{background:#f0f1e9;border-color:#dce1d5;color:#687568}
+.extra{border-color:#dfe2d7;background:#ffffffb8}
+.extra h3{color:#344337}.extra p{color:#687568}
+.bottomline{border-color:#dfe2d7}
+.signature{color:#69766a}
+.tool{border-color:#d4d9ce;background:#f2f3ec;color:#465649}
+.foot{color:#899287}.foot b{color:#a98445}
+.form-wrap .intro{color:#687568}
+label{color:#4d5d50}
+input,select,textarea{border-color:#d2d9ce;background:#fffefa;color:#29382d}
+input::placeholder,textarea::placeholder{color:#9aa397}
+.consent{color:#687568}
+.msg{color:#8b6b35}.age-preview{color:#64836d}
+.error{color:#687568}.error h1{color:#29382d}
+.loading{color:#687568}
+@media(max-width:760px){.card{border-radius:23px}}
+</style>
+
+</head>
+<body>
+<main class="shell">
+ <header class="masthead"><div class="wordmark">PET<span>LINK</span></div><div class="edition">Ivory Luxe · Signature Collection</div></header>
+ <div id="app" class="card" aria-live="polite"><div class="loading">Loading PetLink…</div></div>
+ <footer class="foot">A DIGITAL IDENTITY FOR THE ONES WE LOVE · <b>PETLINK</b></footer>
+</main>
+<script>
+"use strict";
+
+/* Keep this URL and public key identical to the working PetLink index.html. */
+const SUPABASE_URL = "https://fmujvoyvgtmdqjzaudxm.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Fa5O4AiPZWe9_QmlWjcQTQ_RebQBR9F";
+const VIEW_PET_ENDPOINT = SUPABASE_URL + "/functions/v1/view-pet";
+const SUBMIT_PET_ENDPOINT = SUPABASE_URL + "/functions/v1/clever-handler";
+
+const app = document.getElementById("app");
+const headers = {"apikey": SUPABASE_PUBLISHABLE_KEY};
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+
+function ageFromDob(value, fallback) {
+  if (!value) return fallback || "Not shared";
+  const birth = new Date(value + "T00:00:00");
+  const today = new Date();
+  if (Number.isNaN(birth.getTime()) || birth > today) return fallback || "Not shared";
+  let years = today.getFullYear() - birth.getFullYear();
+  let months = today.getMonth() - birth.getMonth();
+  const days = today.getDate() - birth.getDate();
+  if (days < 0) months--;
+  if (months < 0) { years--; months += 12; }
+  if (years === 0 && months === 0) return "Less than 1 month";
+  return [years ? years + "y" : "", months ? months + "m" : ""].filter(Boolean).join(" ") || "Less than 1 month";
+}
+
+function showError(message) {
+  app.innerHTML = `<div class="error"><h1>Profile unavailable</h1><p>${esc(message)}</p><p>Please refresh the page in a moment. If the problem continues, contact PetLink.</p></div>`;
+}
+
+function showForm() {
+  app.innerHTML = `<div class="form-wrap">
+    <div class="kicker">PETLINK · IVORY LUXE</div>
+    <h1>Create their identity.</h1>
+    <p class="intro">Share your pet's details. Our team will prepare a personalised profile in the Ivory Luxe collection.</p>
+    <form id="f">
+      <label>Pet's name *</label><input name="pet_name" required maxlength="60" placeholder="e.g. Bruno">
+      <label>Pet photograph</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp">
+      <div class="form-grid">
+        <div><label>Animal type</label><select name="animal_type"><option value="">Select</option><option>Dog</option><option>Cat</option><option>Other</option></select></div>
+        <div><label>Gender</label><select name="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+      </div>
+      <div class="form-grid">
+        <div><label>Breed</label><input name="breed"></div>
+        <div><label>Date of birth *</label><input name="dob" id="petDob" type="date" required><div class="age-preview" id="agePreview">Age will be calculated automatically.</div></div>
+      </div>
+      <label>Your name *</label><input name="owner_name" required>
+      <label>Owner mobile number * (calls and WhatsApp)</label><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="10-digit mobile number" pattern="[+]?[0-9\\s-]{10,15}">
+      <label>City *</label><input name="city" required>
+      <label>Medical information (optional)</label><textarea name="medical_notes" placeholder="Share any important care information."></textarea>
+      <label class="consent"><input type="checkbox" name="profile_consent" value="true" required> I agree that PetLink may use these details to prepare my pet's profile and contact me about this order.</label>
+      <label class="consent"><input type="checkbox" name="public_contact_consent" value="true"> I agree that my mobile number may be displayed on my pet's public profile so someone who finds my pet can call or WhatsApp me.</label>
+      <button class="submit">SUBMIT PET DETAILS</button><div id="msg" class="msg" role="status"></div>
+    </form>
+  </div>`;
+
+  const dob = document.getElementById("petDob");
+  const preview = document.getElementById("agePreview");
+  dob.max = new Date().toISOString().slice(0, 10);
+  dob.addEventListener("change", () => {
+    const age = ageFromDob(dob.value, "");
+    preview.textContent = age ? "Calculated age: " + age : "Please enter a valid date of birth.";
+  });
+
+  document.getElementById("f").onsubmit = async e => {
+    e.preventDefault();
+    const btn = e.target.querySelector("button");
+    const msg = document.getElementById("msg");
+    btn.disabled = true;
+    btn.textContent = "SUBMITTING…";
+    try {
+      const response = await fetch(SUBMIT_PET_ENDPOINT, {
+        method: "POST",
+        headers,
+        body: new FormData(e.target)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || "Submission failed. Please try again.");
+      e.target.reset();
+      preview.textContent = "Age will be calculated automatically.";
+      msg.textContent = "Thank you. Your details have been received by PetLink.";
+      btn.textContent = "SUBMITTED";
+    } catch (error) {
+      msg.textContent = error.message || "Unable to submit. Please try again.";
+      btn.disabled = false;
+      btn.textContent = "SUBMIT PET DETAILS";
+    }
+  };
+}
+
+async function showPet(id) {
+  app.innerHTML = '<div class="loading">Preparing your Ivory Luxe profile…</div>';
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+
+  try {
+    const response = await fetch(VIEW_PET_ENDPOINT, {
+      method: "POST",
+      headers: {...headers, "Content-Type":"application/json"},
+      body: JSON.stringify({pet_id:id}),
+      signal: controller.signal
+    });
+
+    const data = await response.json().catch(() => null);
+    if (!response.ok) {
+      throw new Error(data?.error || `Profile request failed (HTTP ${response.status}).`);
+    }
+    if (!data || !data.pet) {
+      throw new Error(data?.error || "The profile service returned an unexpected response.");
+    }
+
+    const p = data.pet;
+    const age = ageFromDob(p.dob, p.age_text);
+    const phone = p.phone ? String(p.phone).replace(/\D/g, "") : "";
+    const whatsapp = p.whatsapp ? String(p.whatsapp).replace(/\D/g, "") : phone;
+    const waNumber = whatsapp ? (whatsapp.length === 10 ? "91" + whatsapp : whatsapp) : "";
+    const waText = encodeURIComponent("Hello, I found " + (p.pet_name || "your pet") + ". I am sharing my location with you now.");
+    const contact = (p.show_whatsapp === false && p.show_phone === false) || !waNumber
+      ? '<div class="private">Owner contact has not been enabled for this profile.</div>'
+      : `<a class="contact-action" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}?text=${waText}">↗ &nbsp; Share my location with their human</a>`;
+    const photo = p.photo_url
+      ? `<img src="${esc(p.photo_url)}" alt="${esc(p.pet_name || "Pet")}" loading="eager">`
+      : "";
+
+    app.innerHTML = `<article class="profile">
+      ${p.is_lost ? '<div class="lost">● &nbsp; LOST PET ALERT · PLEASE HELP ME GET HOME</div>' : ""}
+      <div class="profile-grid">
+        <div class="visual">${photo}<div class="photo-label">Verified PetLink identity</div><div class="visual-caption"><div class="overline">${esc(p.animal_type || "Beloved companion")}</div><h1>${esc(p.pet_name || "Pet")}</h1><p>${esc(p.breed || "")}${p.city ? " · " + esc(p.city) : ""}</p></div></div>
+        <div class="details">
+          <div class="serial"><span class="kicker">The Ivory Collection</span><span>Pet ID · ${esc(String(p.pet_id || id).slice(0,8))}</span></div>
+          <div class="identity"><div class="kicker">A life, beautifully connected</div><h2>Every detail tells their story.</h2><p>A little companion. An irreplaceable place in someone's world. This is their PetLink identity.</p></div>
+          <div class="facts">
+            <div class="fact"><small>Gender</small><strong>${esc(p.gender || "Not shared")}</strong></div>
+            <div class="fact"><small>Age</small><strong>${esc(age)}</strong></div>
+            <div class="fact"><small>Breed</small><strong>${esc(p.breed || "Not shared")}</strong></div>
+            <div class="fact"><small>Home city</small><strong>${esc(p.city || "Not shared")}</strong></div>
+          </div>
+          <div class="owner-box"><small>Their favourite human</small><p class="owner-name">${esc(p.owner_name || "Their human")}</p><p class="city">Always loved. Always missed.</p></div>
+        </div>
+      </div>
+      <section class="contact"><div class="contact-top"><div><div class="kicker">Have you found me?</div><h2>Let's get them home.</h2><p class="sub">One tap opens WhatsApp. Share your current location in the chat.</p></div><div style="font-size:30px" aria-hidden="true">⌖</div></div>${contact}</section>
+      <div class="extra-grid">
+        ${p.public_medical_notes ? `<section class="extra"><h3>Care & comfort</h3><p>${esc(p.public_medical_notes)}</p></section>` : ""}
+        ${p.notes ? `<section class="extra"><h3>A little more</h3><p>${esc(p.notes)}</p></section>` : ""}
+      </div>
+      <div class="bottomline"><div class="signature">“Home is wherever they are.”</div><div class="tools"><button class="tool" id="share">Share profile ↗</button><button class="tool" id="copy">Copy profile link</button></div></div>
+    </article>`;
+
+    document.getElementById("share").addEventListener("click", async () => {
+      try {
+        if (navigator.share) {
+          await navigator.share({title:(p.pet_name || "Pet") + " · PetLink",text:"Meet " + (p.pet_name || "this pet") + ".",url:location.href});
+        } else {
+          await navigator.clipboard.writeText(location.href);
+          document.getElementById("share").textContent = "Copied ✓";
+        }
+      } catch (_) {}
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        document.getElementById("copy").textContent = "Copied ✓";
+      } catch (_) {
+        window.prompt("Copy this profile link:", location.href);
+      }
+    });
+  } catch (error) {
+    const message = error.name === "AbortError"
+      ? "The profile service took too long to respond. Please refresh and try again."
+      : (error.message || "Unable to load this profile.");
+    showError(message);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+const petId = new URLSearchParams(location.search).get("pet");
+if (petId) showPet(petId);
+else showForm();
+</script>
+</body>
+</html>
