@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PetLink Admin</title>
+<style>
+:root{--ink:#17251f;--muted:#718078;--green:#176b4b;--bg:#f4f7f4;--line:#e3eae5;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:#123e2e;color:white;padding:22px max(20px,calc((100% - 1120px)/2));display:flex;justify-content:space-between;align-items:center}
+header h1{margin:0;font-size:22px}header span{opacity:.8;font-size:13px}
+main{max-width:1120px;margin:28px auto;padding:0 18px}.panel,.stat{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 20px #173e2e08}
+#login{max-width:420px;margin:60px auto}.field{display:block;margin:13px 0;color:var(--muted);font-size:13px}
+input{display:block;width:100%;padding:13px;border:1px solid #d6e0d9;border-radius:10px;margin-top:6px;font:inherit;color:var(--ink)}
+button{border:0;border-radius:10px;padding:11px 15px;background:var(--green);color:white;font-weight:650;cursor:pointer}
+button.secondary{background:#eaf2ed;color:#18543d}button.danger{background:#a83b36}button:disabled{opacity:.5;cursor:wait}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.stat strong{display:block;font-size:28px}.stat small{color:var(--muted)}
+.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.card{border:1px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;display:grid;grid-template-columns:76px 1fr auto;gap:15px;align-items:center}
+.card img{width:76px;height:76px;object-fit:cover;border-radius:12px;background:#eef2ee}
+.card h3{margin:0 0 3px}.meta{font-size:13px;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.badge{display:inline-block;padding:3px 8px;border-radius:20px;background:#fff2d9;color:#865a0b;font-size:12px}
+#message{margin:12px 0;color:#a33}.hidden{display:none!important}
+@media(max-width:650px){.stats{grid-template-columns:1fr 1fr}.card{grid-template-columns:58px 1fr}.card img{width:58px;height:58px}.actions{grid-column:1/-1;justify-content:flex-start}}
+</style>
+</head>
+<body>
+<header><div><h1>🐾 PetLink Admin</h1><span>Private submission & profile manager</span></div><button id="logout" class="secondary hidden">Log out</button></header>
+<main>
+<section id="login" class="panel">
+<h2>Admin login</h2><p class="meta">Sign in with the admin account you created in Supabase.</p>
+<label class="field">Email<input id="email" type="email" autocomplete="username" placeholder="Admin email"></label>
+<label class="field">Password<input id="password" type="password" autocomplete="current-password" placeholder="Password"></label>
+<button id="loginBtn">Sign in</button><p id="loginMsg"></p>
+</section>
+<section id="app" class="hidden">
+<div class="stats">
+<div class="stat"><small>All submissions</small><strong id="total">0</strong></div>
+<div class="stat"><small>New submissions</small><strong id="newCount">0</strong></div>
+<div class="stat"><small>Approved profiles</small><strong id="approved">0</strong></div>
+</div>
+<div class="toolbar"><div><h2 style="margin:0">Customer submissions</h2><span class="meta">Review each request before creating its public pet profile.</span></div><button id="refresh" class="secondary">Refresh</button></div>
+<div id="message"></div><div id="list"></div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://fmujvoyvgtmdqjzaudxm.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Fa5O4AiPZWe9_QmlWjcQTQ_RebQBR9F";
+const FUNCTION_URL = SUPABASE_URL + "/functions/v1/admin-api";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const $ = id => document.getElementById(id);
+let session = null;
+
+function say(msg, bad=true){$("message").textContent=msg||"";$("message").style.color=bad?"#a33":"#176b4b";}
+async function api(action, extra={}){
+  const {data:{session:s}} = await db.auth.getSession();
+  if(!s) throw new Error("Your session has expired. Please sign in again.");
+  const r=await fetch(FUNCTION_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+s.access_token,"apikey":SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({action,...extra})});
+  const j=await r.json().catch(()=>({error:"Unexpected server response"}));
+  if(!r.ok) throw new Error(j.error||"Request failed");
+  return j;
+}
+function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function load(){
+  say("Loading submissions…",false);
+  try{
+    const data=await api("list");
+    const rows=data.submissions||[];
+    $("total").textContent=rows.length;
+    $("newCount").textContent=rows.filter(x=>x.status==="new").length;
+    $("approved").textContent=rows.filter(x=>x.status==="approved").length;
+    $("list").innerHTML=rows.length?rows.map(x=>{
+      const photo=x.photo_url?`<img src="${safe(x.photo_url)}" alt="">`:`<div style="width:76px;height:76px;border-radius:12px;background:#eef2ee;display:grid;place-items:center">🐾</div>`;
+      const status=x.status||"new";
+      const approvedLink=x.approved_pet_id?`<button class="secondary" data-copy="${safe(x.approved_pet_id)}">Copy NFC link</button>`:"";
+      const actions=status==="new"?`<button data-approve="${safe(x.submission_id)}">Approve & create profile</button><button class="danger" data-reject="${safe(x.submission_id)}">Reject</button>`:approvedLink;
+      return `<article class="card">${photo}<div><h3>${safe(x.pet_name)} <span class="badge">${safe(status)}</span></h3><div>${safe(x.animal_type||"Pet")} · ${safe(x.breed||"Breed not provided")} · ${safe(x.age_text||"Age not provided")}</div><div class="meta">Owner: ${safe(x.owner_name)} · ${safe(x.city)} · ${safe(x.submitted_at)}</div><div class="meta">Phone: ${safe(x.phone)} · WhatsApp: ${safe(x.whatsapp)}</div></div><div class="actions">${actions}</div></article>`;
+    }).join(""):"<div class='panel'>No customer submissions yet.</div>";
+    say("",false);
+  }catch(e){say(e.message);}
+}
+$("loginBtn").onclick=async()=>{
+  $("loginMsg").textContent="Signing in…";
+  const {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
+  if(error){$("loginMsg").textContent=error.message;return;}
+  session=data.session;
+  $("login").classList.add("hidden");$("app").classList.remove("hidden");$("logout").classList.remove("hidden");
+  await load();
+};
+$("logout").onclick=async()=>{await db.auth.signOut();location.reload();};
+$("refresh").onclick=load;
+$("list").addEventListener("click",async e=>{
+  const b=e.target.closest("button");if(!b)return;
+  try{
+    if(b.dataset.approve){b.disabled=true;const r=await api("approve",{submission_id:b.dataset.approve});say("Profile created. Pet ID: "+r.pet_id,false);await load();if(r.profile_url)window.prompt("Copy this NFC profile URL and write it to the keychain:",r.profile_url);}
+    if(b.dataset.reject){if(!confirm("Reject this customer submission?"))return;b.disabled=true;await api("reject",{submission_id:b.dataset.reject});say("Submission rejected.",false);await load();}
+    if(b.dataset.copy){const url=location.origin+location.pathname+"?pet="+b.dataset.copy;await navigator.clipboard.writeText(url);say("NFC profile link copied: "+url,false);}
+  }catch(err){say(err.message);b.disabled=false;}
+});
+(async()=>{const {data:{session:s}}=await db.auth.getSession();if(s){session=s;$("login").classList.add("hidden");$("app").classList.remove("hidden");$("logout").classList.remove("hidden");await load();}})();
+</script>
+</body>
+</html>
