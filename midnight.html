@@ -3,213 +3,178 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#14251d">
-<title>PetLink | A little tag. A lot of love.</title>
+<meta name="theme-color" content="#0b1020">
+<title>Midnight Luxe | PetLink</title>
 <style>
-:root{--bg:#101812;--panel:#18251d;--panel2:#203126;--gold:#e7c77f;--cream:#fff9ed;--muted:#c0c8bd;--line:#ffffff1c;--mint:#c6e0c2;--coral:#ffad99}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#43583d 0,#1a2a20 38%,#0c120e 82%);color:var(--cream);font-family:"Avenir Next",ui-rounded,system-ui,sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.09;background-image:radial-gradient(#f1d99f .8px,transparent .8px);background-size:23px 23px}
-.wrap{position:relative;max-width:700px;margin:auto;padding:18px 15px 38px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:7px 5px 18px}
-.brand{font-weight:950;letter-spacing:.2em;font-size:19px}.brand span{color:var(--gold)}
-.tiny{font-size:9px;letter-spacing:.17em;color:var(--gold);text-transform:uppercase;font-weight:850}
-.footer{text-align:center;color:#929d91;font-size:10px;letter-spacing:.15em;margin:22px 0 0}.footer b{color:var(--gold)}
-.card{border:1px solid #e7c77f38;border-radius:27px;background:linear-gradient(145deg,#1c2a20,#111a14);overflow:hidden;box-shadow:0 28px 90px #0009,0 0 45px #e0bf7510}
-.pad{padding:25px}h1{font:400 36px Georgia,serif;margin:10px 0}.intro{font-size:13px;color:var(--muted);line-height:1.65}
-label{display:block;margin:15px 0 7px;font-size:12px;color:#e8d8b4}
-input,select,textarea{width:100%;padding:13px;border-radius:11px;border:1px solid #596b59;background:#0d1710;color:white;font:14px system-ui}
-textarea{min-height:75px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-btn{width:100%;padding:15px;margin-top:20px;border:0;border-radius:12px;background:linear-gradient(110deg,#c4a15a,#f0d99d);font-weight:850;color:#171a12;cursor:pointer}
-.msg{font-size:13px;line-height:1.5;margin-top:15px;color:#efdaa6}
-.pet-page{position:relative}
-.hero{height:430px;position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 50% 35%,#657b50,#273c2d 55%,#111a13)}
-.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;animation:photoIn 1.1s ease both}
-.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#07100955 0%,#07100905 32%,#07100935 55%,#071009ed 100%)}
-.hero-top{position:absolute;top:17px;left:17px;right:17px;display:flex;justify-content:space-between;gap:8px;align-items:center}
-.glass{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:99px;border:1px solid #ffffff45;background:#101710a8;backdrop-filter:blur(12px);color:#fff5d9;font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
-.dot{width:7px;height:7px;background:#a7d49a;border-radius:50%;box-shadow:0 0 12px #a7d49a}
-.hero-copy{position:absolute;bottom:25px;left:22px;right:22px;text-align:center}
-.eyebrow{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:900}
-.pet-name{font:400 clamp(43px,10vw,67px)/1 Georgia,serif;margin:10px 0 8px;color:#fff8e9;text-shadow:0 4px 28px #000b}
-.pet-sub{font-size:13px;color:#f2e8cf;letter-spacing:.05em}
-.tap-hint{display:inline-flex;align-items:center;gap:6px;margin-top:13px;padding:8px 12px;border-radius:99px;background:#fff2d91c;border:1px solid #fff3d633;color:#fff2d9;font-size:10px}
-.profile-body{padding:0 21px 25px}
-.welcome-strip{margin:0 -21px;padding:14px 12px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#b68d45,#f0d99d,#b68d45);color:#241d10;font-size:10px;font-weight:1000;letter-spacing:.15em;text-transform:uppercase}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:17px 0}
-.stat{padding:14px 7px;text-align:center;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#ffffff0d,#ffffff03);animation:rise .65s both}
-.stat:nth-child(2){animation-delay:.1s}.stat:nth-child(3){animation-delay:.2s}
-.stat .emoji{font-size:19px;display:block;margin-bottom:7px}.stat strong{display:block;color:#fff3d5;font-size:13px;margin-bottom:4px;overflow-wrap:anywhere}.stat small{display:block;color:#b4bdaf;font-size:8px;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
-.section-title{display:flex;align-items:center;gap:9px;margin:24px 0 12px;font:22px Georgia,serif;color:#f5e8ca}
-.section-title .icon{width:33px;height:33px;border-radius:11px;display:grid;place-items:center;background:#e0bf751b;border:1px solid #e0bf7540;font:16px system-ui}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.info{padding:14px;border:1px solid #ffffff17;border-radius:15px;background:#ffffff08;min-width:0}
-.info small{display:block;color:#aeb8aa;font-size:8px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;font-weight:800}
-.info strong{font-size:13px;color:#fff5e1;font-weight:700;overflow-wrap:anywhere}
-.contact-card{margin-top:20px;padding:18px;border:1px solid #e7c77f70;border-radius:19px;background:linear-gradient(145deg,#e7c77f1d,#ffffff06);box-shadow:0 12px 30px #0002}
-.contact-head{display:flex;gap:11px;align-items:center;margin-bottom:7px}
-.contact-icon{width:42px;height:42px;flex:none;border-radius:14px;display:grid;place-items:center;background:#e7c77f25;font-size:21px}
-.contact-head h2{font:22px Georgia,serif;margin:0;color:#fff2d6}
-.contact-card p{font-size:12px;color:#c6c9ba;line-height:1.55;margin:7px 0 14px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.actions a{display:flex;justify-content:center;align-items:center;gap:8px;text-decoration:none;text-align:center;padding:14px 10px;border-radius:13px;background:linear-gradient(110deg,#bd984f,#f0d99d);color:#211a0d;font-size:11px;font-weight:1000;letter-spacing:.05em;transition:transform .2s,filter .2s}
-.actions a:hover{transform:translateY(-2px);filter:brightness(1.08)}
-.actions a.alt{background:#ffffff08;border:1px solid #e0bf7570;color:#f1dfb6}
-.contact-private{font-size:11px;color:#b7c2b4;background:#ffffff08;border:1px solid #ffffff16;border-radius:12px;padding:12px;line-height:1.5}
-.finder-panel{margin-top:20px;padding:18px;border:1px solid #e7c77f70;border-radius:19px;background:linear-gradient(145deg,#e7c77f1d,#ffffff06)}
-.finder-panel h2{font:22px Georgia,serif;margin:0;color:#fff2d6}
-.finder-panel p{font-size:12px;color:#c6c9ba;line-height:1.55}
-.finder-reveal{display:none;margin-top:13px;padding:14px;border:1px solid #ffffff20;border-radius:14px;background:#0d1710}
-.finder-reveal.open{display:block;animation:rise .35s both}
-.owner-number{font-size:20px;letter-spacing:.04em;color:#fff2d6;font-weight:850;overflow-wrap:anywhere;margin:8px 0 13px}
-.finder-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.finder-actions a{display:flex;justify-content:center;align-items:center;text-align:center;text-decoration:none;padding:13px 9px;border-radius:12px;background:linear-gradient(110deg,#bd984f,#f0d99d);color:#211a0d;font-size:10px;font-weight:1000}
-.finder-actions a.alt{background:#ffffff08;border:1px solid #e0bf7570;color:#f1dfb6}
-.finder-trigger{
-  display:flex;
-  width:100%;
-  min-height:54px;
-  box-sizing:border-box;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  text-decoration:none;
-  line-height:1.35;
-  white-space:normal;
-  overflow-wrap:anywhere;
-  border:1px solid #f3d995;
-  border-radius:14px;
-  padding:14px 18px;
-  background:linear-gradient(110deg,#bd984f,#f0d99d);
-  color:#211a0d;
-  font-size:11px;
-  font-weight:1000;
-  letter-spacing:.055em;
-  cursor:pointer;
-  box-shadow:0 7px 18px #0003,inset 0 1px #fff5;
-  transition:transform .2s,filter .2s,box-shadow .2s;
-}
-.finder-trigger:hover{
-  transform:translateY(-1px);
-  filter:brightness(1.06);
-  box-shadow:0 10px 22px #0004,inset 0 1px #fff7;
-}
-.finder-trigger:active{transform:scale(.985)}
-@media(max-width:520px){
-  .finder-panel{padding:16px;margin-top:18px}
-  .finder-panel .contact-head{gap:10px;margin-bottom:12px}
-  .finder-panel h2{font-size:21px}
-  .finder-trigger{min-height:56px;padding:13px 14px;font-size:10px;letter-spacing:.045em}
-}
-.age-preview{font-size:11px;color:#c9d9c4;margin-top:7px;min-height:17px}
-.lost{margin:15px 0;padding:16px;border-radius:15px;background:linear-gradient(100deg,#782f25,#3d1b18);border:1px solid #d77963;color:#fff0e8;text-align:center;font-weight:900;letter-spacing:.04em;animation:lostPulse 2s infinite}
-.love-note{position:relative;margin-top:18px;padding:19px 17px;border:1px solid #e0bf7545;border-radius:17px;background:linear-gradient(135deg,#e0bf7517,#ffffff05);text-align:center}
-.love-note:before{content:"✦  ✧  ✦";display:block;color:var(--gold);letter-spacing:.6em;font-size:11px;margin-bottom:9px}
-.love-note p{margin:0;color:#e9dfca;font:italic 16px/1.5 Georgia,serif}.love-note small{display:block;margin-top:10px;color:#b8a77f;font-size:8px;letter-spacing:.17em;text-transform:uppercase}
-.note{padding:15px;border-radius:15px;border:1px solid var(--line);background:#e0bf750d;font-size:13px;line-height:1.65;color:#e9dfca}
-.share-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:18px}
-.share-btn{border:0;background:none;color:#d5c8a8;text-decoration:underline;text-underline-offset:4px;font:11px system-ui;cursor:pointer;padding:8px}
-.error{padding:35px;text-align:center}
-.burst{position:fixed;z-index:99;pointer-events:none;font-size:22px;animation:burst 950ms ease-out forwards}
-@keyframes photoIn{from{opacity:.4;transform:scale(1.08)}to{opacity:1;transform:scale(1)}}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes lostPulse{0%,100%{box-shadow:0 0 0 0 #d7796300}50%{box-shadow:0 0 0 5px #d7796322}}
-@keyframes burst{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(35deg) scale(1.3)}}
-@media(max-width:520px){.hero{height:380px}.profile-body{padding:0 14px 21px}.welcome-strip{margin:0 -14px}.stats{gap:6px}.stat{padding:12px 4px}.stat strong{font-size:12px}.actions{grid-template-columns:1fr}.hero-copy{left:14px;right:14px}.pad{padding:20px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
-
-<style id="petlink-theme-midnight">
 :root{
-  --bg:#090f1d;--panel:#111c31;--panel2:#192844;--gold:#b9c9e8;
-  --cream:#f4f7ff;--muted:#b5c1d8;--line:#d9e4ff24;--mint:#a9d8d1;--coral:#d7a9c8;
+  --ink:#0b1020;--navy:#111a30;--navy2:#18243e;--paper:#f4f1e9;
+  --muted:#aeb9cf;--silver:#cbd6e8;--accent:#c6d4ef;--line:#dbe5f322;
+  --gold:#d6bd85;--rose:#d9b4c7;--mint:#a9d8cf;
 }
-body{background:radial-gradient(ellipse at 50% -15%,#354c70 0,#14223b 40%,#070c17 84%);color:var(--cream)}
-body:before{background-image:radial-gradient(#dce8ff .7px,transparent .7px);opacity:.07}
-.brand span,.tiny,.footer b,.eyebrow{color:#c6d5f2}
-.card{border-color:#a9c5ef40;background:linear-gradient(145deg,#172640,#0c1425);box-shadow:0 28px 90px #000b,0 0 45px #9bbbe51a}
-label{color:#d7e2f7}
-input,select,textarea{border-color:#536786;background:#0b1425;color:#f5f8ff}
-.form-btn,.finder-trigger,.actions a,.finder-actions a{
- background:linear-gradient(110deg,#8199bf,#dce6f7);color:#101a2b;border-color:#dce6f7
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:
+ radial-gradient(ellipse at 8% 8%,#263a60 0,transparent 34%),
+ radial-gradient(ellipse at 92% 40%,#1d2944 0,transparent 35%),#080d19;
+ color:var(--paper);font-family:Inter,"Avenir Next",system-ui,sans-serif}
+button,input,select,textarea{font:inherit}
+.shell{max-width:1120px;margin:auto;padding:28px 24px 36px}
+.masthead{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 25px}
+.wordmark{font-size:14px;letter-spacing:.32em;font-weight:900;color:#f5f2eb}
+.wordmark span{color:var(--gold)}
+.edition{font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:#aebbd2}
+.card{border:1px solid #dbe5f32b;border-radius:28px;overflow:hidden;background:linear-gradient(145deg,#121d34f2,#0b1223f5);box-shadow:0 35px 100px #0009}
+.profile{padding:28px}
+.kicker{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:800}
+.profile-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);gap:28px;align-items:stretch}
+.visual{position:relative;min-height:590px;border-radius:22px;overflow:hidden;background:linear-gradient(145deg,#314768,#111a30)}
+.visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.visual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#07101b22 15%,#07101b08 42%,#07101be8 100%)}
+.photo-label{position:absolute;z-index:1;top:18px;left:18px;padding:10px 13px;border:1px solid #ffffff55;border-radius:99px;background:#0b102088;backdrop-filter:blur(12px);font-size:9px;letter-spacing:.15em;text-transform:uppercase}
+.visual-caption{position:absolute;z-index:1;left:28px;right:28px;bottom:28px}
+.visual-caption .overline{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#e5d2a9}
+.visual-caption h1{font:400 clamp(48px,7vw,82px)/.95 Georgia,serif;letter-spacing:-.045em;margin:12px 0;color:#fffaf0}
+.visual-caption p{margin:0;color:#e3e8f1;font-size:13px;letter-spacing:.08em}
+.details{display:flex;flex-direction:column;padding:7px 4px 4px}
+.serial{display:flex;justify-content:space-between;align-items:center;padding-bottom:17px;border-bottom:1px solid var(--line)}
+.serial span:last-child{color:var(--muted);font-size:9px;letter-spacing:.17em;text-transform:uppercase}
+.identity{padding:25px 0 20px}
+.identity h2{font:400 34px/1.08 Georgia,serif;margin:10px 0 8px;color:#f7f2e8}
+.identity p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:4px 0 22px}
+.fact{padding:15px 14px;border:1px solid var(--line);border-radius:14px;background:#ffffff07}
+.fact small,.owner-box small{display:block;color:#9eacc5;font-size:8px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;font-weight:800}
+.fact strong{font-size:13px;color:#f2f3f5;overflow-wrap:anywhere}
+.owner-box{padding:17px;border:1px solid #d6bd8555;border-radius:16px;background:linear-gradient(140deg,#d6bd8518,#ffffff04);margin-top:auto}
+.owner-box .owner-name{font:24px Georgia,serif;color:#f7efdc;margin:0 0 5px}
+.owner-box .city{font-size:12px;color:var(--muted);margin:0}
+.lost{margin:0 0 17px;padding:13px 15px;border-radius:12px;background:#612b36;border:1px solid #d98c9b;color:#fff0f2;font-size:11px;font-weight:850;letter-spacing:.08em}
+.contact{margin-top:26px;padding:23px;border:1px solid #d6bd8566;border-radius:20px;background:linear-gradient(120deg,#d6bd8518,#ffffff05)}
+.contact-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.contact h2{font:30px Georgia,serif;margin:8px 0 4px}
+.contact .sub{font-size:12px;color:var(--muted);margin:0}
+.contact-action{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;margin-top:19px;padding:16px 20px;border-radius:12px;background:linear-gradient(110deg,#b9c9e8,#edf2fc);color:#111a2c;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;transition:transform .2s,filter .2s}
+.contact-action:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.private{margin-top:18px;padding:14px;border-radius:12px;background:#ffffff08;border:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6}
+.extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.extra{padding:18px;border:1px solid var(--line);border-radius:16px;background:#ffffff06}
+.extra h3{font:20px Georgia,serif;margin:0 0 10px;color:#eee8da}
+.extra p{margin:0;color:#bdc7d8;font-size:12px;line-height:1.7;white-space:pre-wrap}
+.bottomline{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:24px;padding-top:19px;border-top:1px solid var(--line)}
+.signature{font:italic 17px Georgia,serif;color:#d9d4c8}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tool{border:1px solid #dbe5f344;background:#ffffff08;color:#dce5f5;padding:10px 13px;border-radius:99px;font-size:10px;cursor:pointer}
+.foot{text-align:center;margin-top:21px;color:#7f8da7;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+.foot b{color:var(--gold)}
+/* submission form */
+.form-wrap{max-width:650px;margin:auto;padding:35px}
+.form-wrap h1{font:400 40px Georgia,serif;margin:12px 0}
+.form-wrap .intro{font-size:13px;line-height:1.7;color:var(--muted)}
+label{display:block;margin:15px 0 7px;color:#d8e1f0;font-size:11px}
+input,select,textarea{width:100%;padding:13px;border-radius:10px;border:1px solid #536786;background:#0b1425;color:#f5f8ff}
+textarea{min-height:80px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.consent{display:flex;gap:10px;align-items:flex-start;color:#bdc8dc;font-size:11px;line-height:1.6;margin-top:14px}
+.consent input{width:auto;margin-top:3px}
+.submit{width:100%;border:0;border-radius:11px;padding:15px;margin-top:20px;background:linear-gradient(110deg,#8199bf,#dce6f7);color:#101a2b;font-size:11px;font-weight:900;letter-spacing:.1em;cursor:pointer}
+.msg{margin-top:14px;color:#e8d5a8;font-size:12px;line-height:1.6}
+.age-preview{font-size:10px;color:#a9d8cf;margin-top:6px;min-height:15px}
+.error{padding:45px;text-align:center;color:var(--muted)}
+@media(max-width:760px){
+ .shell{padding:17px 12px 25px}.masthead{padding:5px 3px 17px}
+ .profile{padding:13px}.profile-grid{grid-template-columns:1fr;gap:17px}
+ .visual{min-height:450px}.details{padding:8px 7px 5px}
+ .identity{padding:19px 0 15px}.identity h2{font-size:30px}
+ .contact{padding:18px}.contact h2{font-size:26px}
+ .bottomline{align-items:flex-start;flex-direction:column}
+ .form-wrap{padding:23px 18px}.form-grid{grid-template-columns:1fr}
 }
-.hero{background:radial-gradient(circle at 50% 35%,#526b91,#243a5c 55%,#0b1425)}
-.hero:after{background:linear-gradient(180deg,#07101d66 0%,#07101d08 32%,#07101d42 55%,#07101df0 100%)}
-.glass{background:#0b1425b8;color:#f1f5ff;border-color:#dce8ff55}
-.dot{background:#a8d9d0;box-shadow:0 0 12px #a8d9d0}
-.pet-name{color:#f7f9ff}
-.pet-sub{color:#dbe5f7}
-.tap-hint{background:#dce8ff15;border-color:#dce8ff35;color:#eaf0ff}
-.welcome-strip{background:linear-gradient(90deg,#7189ad,#dce6f7,#7189ad);color:#111a2a}
-.stat{background:linear-gradient(145deg,#dce8ff10,#dce8ff03);border-color:#dce8ff25}
-.stat strong{color:#f1f5ff}.stat small{color:#b7c5dc}
-.section-title{color:#e8efff}
-.section-title .icon{background:#9bbbe51c;border-color:#9bbbe544}
-.info{border-color:#dce8ff20;background:#dce8ff08}
-.info small{color:#b7c5dc}.info strong{color:#f4f7ff}
-.contact-card,.finder-panel{border-color:#a9c5ef75;background:linear-gradient(145deg,#9bbbe51c,#dce8ff07)}
-.contact-icon{background:#9bbbe528}
-.contact-head h2,.finder-panel h2{color:#eaf0ff}
-.contact-card p,.finder-panel p{color:#c0cbe0}
-.actions a.alt,.finder-actions a.alt{background:#dce8ff0a;border-color:#a9c5ef70;color:#dce6f7}
-.contact-private{color:#c0cbe0;background:#dce8ff08;border-color:#dce8ff20}
-.finder-reveal{background:#0b1425;border-color:#dce8ff25}
-.owner-number{color:#eaf0ff}
-.footer{color:#9eacc5}
-@media(max-width:520px){.card{border-radius:24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 </head>
 <body>
-<main class="wrap">
-<header class="top"><div class="brand">PET<span>LINK</span></div><div class="tiny">A safer way home</div></header>
-<div id="app" class="card"></div>
-<div class="footer">MADE WITH <b>♥</b> BY PETLINK · EVERY PET HAS A WAY HOME</div>
+<main class="shell">
+ <header class="masthead"><div class="wordmark">PET<span>LINK</span></div><div class="edition">Midnight Luxe · Private Collection</div></header>
+ <div id="app" class="card"></div>
+ <footer class="foot">A DIGITAL IDENTITY FOR THE ONES WE LOVE · <b>PETLINK</b></footer>
 </main>
 <script>
-const SUPABASE_URL="https://fmujvoyvgtmdqjzaudxm.supabase.co";
+const SUPABASE_URL="https://fmjunvojvgtmdqjzaudxm.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_Fa5O4AiPZWe9_QmlWjcQTQ_RebQBR9F";
-const app=document.getElementById("app"),headers={"apikey":SUPABASE_PUBLISHABLE_KEY};
+const app=document.getElementById("app");
+const headers={"apikey":SUPABASE_PUBLISHABLE_KEY};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function showForm(){app.className="card";app.innerHTML=`<div class="pad"><div class="eyebrow">WELCOME TO PETLINK</div><h1>Tell us about your pet.</h1><p class="intro">Share a few details and our team will prepare your personalised PetLink profile.</p><form id="f">
-<label>Pet's name *</label><input name="pet_name" required maxlength="60" placeholder="e.g. Bruno"><label>Pet photograph</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp">
-<div class="grid"><div><label>Animal type</label><select name="animal_type"><option value="">Select</option><option>Dog</option><option>Cat</option><option>Other</option></select></div><div><label>Gender</label><select name="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div></div>
-<div class="grid"><div><label>Breed</label><input name="breed"></div><div><label>Date of birth *</label><input name="dob" id="petDob" type="date" required><div class="age-preview" id="agePreview">Age will be calculated automatically.</div></div></div>
-<label>Your name *</label><input name="owner_name" required><label>Owner mobile number * (used for calls and WhatsApp)</label><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="10-digit mobile number" pattern="[+]?[0-9\\s-]{10,15}"><div class="intro">This single number will be used for both phone calls and WhatsApp contact if you choose to display it on your pet's public profile.</div><label>City *</label><input name="city" required>
-<label>Medical information (optional)</label><textarea name="medical_notes" placeholder="Only share information you are comfortable providing to PetLink."></textarea>
-<div class="intro"><label style="display:flex;gap:9px;align-items:flex-start"><input type="checkbox" name="profile_consent" value="true" required style="width:auto;margin-top:3px"> I agree that PetLink may use these details to prepare my pet's profile and contact me about this order.</label>
-<label style="display:flex;gap:9px;align-items:flex-start"><input type="checkbox" name="public_contact_consent" value="true" style="width:auto;margin-top:3px"> I agree that my mobile number may be displayed on my pet's public PetLink profile so someone who finds my pet can call or WhatsApp me. I understand anyone scanning the tag may see it.</label></div>
-<button class="form-btn">SUBMIT PET DETAILS</button><div id="msg" class="msg"></div></form></div>`;
-const dobInput=document.getElementById("petDob"),agePreview=document.getElementById("agePreview");
-dobInput.max=new Date().toISOString().slice(0,10);
-function formatAgeFromDob(value){if(!value)return "";const birth=new Date(value+"T00:00:00");const today=new Date();if(Number.isNaN(birth.getTime())||birth>today)return "";let years=today.getFullYear()-birth.getFullYear(),months=today.getMonth()-birth.getMonth(),days=today.getDate()-birth.getDate();if(days<0)months--;if(months<0){years--;months+=12;}if(years<0)return "";if(years===0&&months===0)return "Less than 1 month";return [years?years+" year"+(years===1?"":"s"):"",months?months+" month"+(months===1?"":"s"):""].filter(Boolean).join(" "); }
-dobInput.addEventListener("change",()=>{const a=formatAgeFromDob(dobInput.value);agePreview.textContent=a?"Calculated age: "+a:"Please enter a valid date of birth.";});
-document.getElementById("f").onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector("button"),m=document.getElementById("msg");b.disabled=true;b.textContent="SUBMITTING…";try{const r=await fetch(SUPABASE_URL+"/functions/v1/clever-handler",{method:"POST",headers:headers,body:new FormData(e.target)});const d=await r.json();if(!r.ok)throw Error(d.error||"Submission failed");e.target.reset();m.textContent="Thank you! We have received your details. The PetLink team will prepare your profile.";b.textContent="SUBMITTED";}catch(err){m.textContent=err.message;b.disabled=false;b.textContent="SUBMIT PET DETAILS";}};}
-function burstAt(x,y){const symbols=["♥","✦","🐾","✨"];for(let i=0;i<8;i++){const el=document.createElement("span");el.className="burst";el.textContent=symbols[i%symbols.length];el.style.left=x+"px";el.style.top=y+"px";el.style.color=i%2?"#f0d99b":"#f3b4a2";el.style.setProperty("--dx",(Math.random()*130-65)+"px");el.style.setProperty("--dy",(Math.random()*-120-20)+"px");document.body.appendChild(el);setTimeout(()=>el.remove(),1000);}}
-async function showPet(id){app.className="card";app.innerHTML='<div class="pad">Loading your pet’s profile…</div>';try{
-const r=await fetch(SUPABASE_URL+"/functions/v1/view-pet",{method:"POST",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({pet_id:id})});const d=await r.json();if(!r.ok)throw Error(d.error||"This pet profile is not available yet.");const p=d.pet||{};
-function ageFromDob(value){if(!value)return p.age_text||"Not shared";const birth=new Date(value+"T00:00:00"),today=new Date();if(Number.isNaN(birth.getTime())||birth>today)return "Not shared";let y=today.getFullYear()-birth.getFullYear(),m=today.getMonth()-birth.getMonth(),d=today.getDate()-birth.getDate();if(d<0)m--;if(m<0){y--;m+=12;}if(y===0&&m===0)return "Less than 1 month";return [y?y+"y":"",m?m+"m":""].filter(Boolean).join(" ")||"Less than 1 month";}
-const age=esc(ageFromDob(p.dob)),type=p.animal_type||"Pet";
-const photo=p.photo_url?`<img class="hero-photo" src="${esc(p.photo_url)}" alt="${esc(p.pet_name)}">`:"";
-const phone=p.phone?String(p.phone).replace(/[^\d]/g,""):"";
-const waNumber=phone?(phone.length===10?"91"+phone:phone):"";
-const waLink=waNumber?`<a class="alt" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}">✆ <span>MESSAGE ON WHATSAPP</span></a>`:"";
-app.innerHTML=`<section class="hero">${photo}<div class="hero-top"><span class="glass"><i class="dot"></i> VERIFIED PETLINK PROFILE</span><span class="glass">${esc(type)}</span></div><div class="hero-copy"><h1 class="pet-name">${esc(p.pet_name||"Pet")}</h1><div class="pet-sub">${esc(p.breed||type)}${(p.dob||p.age_text)?" · "+age:""}</div><div class="tap-hint">🐾 Tap my photo to send a little love</div></div></section>
-<div class="profile-body"><div class="welcome-strip">A LITTLE TAG. A LOT OF LOVE · PETLINK</div>
-<div class="stats"><div class="stat"><span class="emoji">🐾</span><strong>${esc(p.gender||"Not shared")}</strong><small>Gender</small></div><div class="stat"><span class="emoji">🎂</span><strong>${age}</strong><small>Age</small></div><div class="stat"><span class="emoji">🐶</span><strong>${esc(p.breed||"Not shared")}</strong><small>Breed</small></div></div>
-${p.is_lost?'<div class="lost">🚨 I MAY BE LOST. PLEASE HELP ME GET HOME. CONTACT MY HUMAN BELOW.</div>':""}
-<div class="section-title"><span class="icon">💛</span> My favourite human</div><div class="info-grid"><div class="info"><small>My person</small><strong>${esc(p.owner_name||"My favourite human")}</strong></div><div class="info"><small>Home city</small><strong>${esc(p.city||"Not shared")}</strong></div></div>
-<section class="finder-panel"><div class="contact-head"><div class="contact-icon">📍</div><div><div class="eyebrow">FOUND ME?</div><h2>Help me get home</h2></div></div>${waLink?`<a class="finder-trigger" id="shareLocation" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}?text=${encodeURIComponent("I found "+(p.pet_name||"your pet")+". I am sharing my location with you now.")}">📍 SHARE LOCATION WITH MY HUMAN</a>`:`<div class="contact-private">Owner contact has not been enabled for this profile.</div>`}</section>
-${p.public_medical_notes?`<div class="section-title"><span class="icon">🩺</span> Care notes</div><div class="note">${esc(p.public_medical_notes)}</div>`:""}
-${p.notes?`<div class="section-title"><span class="icon">✨</span> A little more about me</div><div class="note">${esc(p.notes)}</div>`:""}
-<div class="love-note"><p>“I may only be part of your world, but you're my whole world.”</p><small>A little note from the PetLink family</small></div>
-<div class="share-row"><button class="share-btn" id="share">↗ Share this pet profile</button><button class="share-btn" id="copy">▣ Copy profile link</button></div>
-</div>`;
-
-const hero=app.querySelector(".hero");hero.addEventListener("click",e=>burstAt(e.clientX,e.clientY));
-document.getElementById("share").addEventListener("click",async()=>{const data={title:(p.pet_name||"Pet")+" | PetLink",text:"Help "+(p.pet_name||"this pet")+" stay connected with their human.",url:location.href};try{if(navigator.share)await navigator.share(data);else{await navigator.clipboard.writeText(location.href);document.getElementById("share").textContent="✓ Link shared!"}}catch(_){}});
-document.getElementById("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(location.href);document.getElementById("copy").textContent="✓ Copied!"}catch(_){window.prompt("Copy this profile link:",location.href)}});
-}catch(e){app.className="card";app.innerHTML=`<div class="error"><h1>Profile unavailable</h1><p>${esc(e.message)}</p></div>`;}}
-const id=new URLSearchParams(location.search).get("pet");if(id)showPet(id);else showForm();
+function ageFromDob(value,fallback){
+ if(!value)return fallback||"Not shared";
+ const birth=new Date(value+"T00:00:00"),today=new Date();
+ if(Number.isNaN(birth.getTime())||birth>today)return fallback||"Not shared";
+ let y=today.getFullYear()-birth.getFullYear(),m=today.getMonth()-birth.getMonth(),d=today.getDate()-birth.getDate();
+ if(d<0)m--;if(m<0){y--;m+=12;}
+ if(y===0&&m===0)return "Less than 1 month";
+ return [y?y+"y":"",m?m+"m":""].filter(Boolean).join(" ")||"Less than 1 month";
+}
+function showForm(){
+ app.innerHTML=`<div class="form-wrap"><div class="kicker">PETLINK · MIDNIGHT LUXE</div><h1>Create their identity.</h1><p class="intro">Share your pet's details. Our team will prepare a personalised profile in the Midnight Luxe collection.</p>
+ <form id="f">
+ <label>Pet's name *</label><input name="pet_name" required maxlength="60" placeholder="e.g. Bruno">
+ <label>Pet photograph</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp">
+ <div class="form-grid"><div><label>Animal type</label><select name="animal_type"><option value="">Select</option><option>Dog</option><option>Cat</option><option>Other</option></select></div><div><label>Gender</label><select name="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div></div>
+ <div class="form-grid"><div><label>Breed</label><input name="breed"></div><div><label>Date of birth *</label><input name="dob" id="petDob" type="date" required><div class="age-preview" id="agePreview">Age will be calculated automatically.</div></div></div>
+ <label>Your name *</label><input name="owner_name" required>
+ <label>Owner mobile number * (calls and WhatsApp)</label><input name="phone" type="tel" inputmode="tel" required placeholder="10-digit mobile number" pattern="[+]?[0-9\\s-]{10,15}">
+ <label>City *</label><input name="city" required>
+ <label>Medical information (optional)</label><textarea name="medical_notes" placeholder="Share any important care information."></textarea>
+ <label class="consent"><input type="checkbox" name="profile_consent" value="true" required> I agree that PetLink may use these details to prepare my pet's profile and contact me about this order.</label>
+ <label class="consent"><input type="checkbox" name="public_contact_consent" value="true"> I agree that my mobile number may be displayed on my pet's public profile so someone who finds my pet can call or WhatsApp me.</label>
+ <button class="submit">SUBMIT PET DETAILS</button><div id="msg" class="msg"></div></form></div>`;
+ const dob=document.getElementById("petDob"),preview=document.getElementById("agePreview");dob.max=new Date().toISOString().slice(0,10);
+ dob.addEventListener("change",()=>{const a=ageFromDob(dob.value,"");preview.textContent=a?"Calculated age: "+a:"Please enter a valid date of birth.";});
+ document.getElementById("f").onsubmit=async e=>{
+  e.preventDefault();const btn=e.target.querySelector("button"),msg=document.getElementById("msg");btn.disabled=true;btn.textContent="SUBMITTING…";
+  try{const r=await fetch(SUPABASE_URL+"/functions/v1/clever-handler",{method:"POST",headers,body:new FormData(e.target)});const d=await r.json();if(!r.ok)throw Error(d.error||"Submission failed.");e.target.reset();msg.textContent="Thank you. Your details have been received by PetLink.";btn.textContent="SUBMITTED";}
+  catch(err){msg.textContent=err.message;btn.disabled=false;btn.textContent="SUBMIT PET DETAILS";}
+ };
+}
+async function showPet(id){
+ app.innerHTML='<div class="error">Preparing your pet’s private collection profile…</div>';
+ try{
+  const r=await fetch(SUPABASE_URL+"/functions/v1/view-pet",{method:"POST",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({pet_id:id})});
+  const data=await r.json();if(!r.ok)throw Error(data.error||"This pet profile is not available yet.");
+  const p=data.pet||{},age=ageFromDob(p.dob,p.age_text);
+  const phone=p.phone?String(p.phone).replace(/\\D/g,""):"";
+  const wa=p.whatsapp?String(p.whatsapp).replace(/\\D/g,""):phone;
+  const waNumber=wa?(wa.length===10?"91"+wa:wa):"";
+  const waText=encodeURIComponent("Hello, I found "+(p.pet_name||"your pet")+". I am sharing my location with you now.");
+  const contact=waNumber?`<a class="contact-action" target="_blank" rel="noopener" href="https://wa.me/${esc(waNumber)}?text=${waText}">↗ &nbsp; Share my location with their human</a>`:`<div class="private">Owner contact has not been enabled for this profile.</div>`;
+  const photo=p.photo_url?`<img src="${esc(p.photo_url)}" alt="${esc(p.pet_name||"Pet")}">`:"";
+  app.innerHTML=`<article class="profile">
+   ${p.is_lost?'<div class="lost">● &nbsp; LOST PET ALERT · PLEASE HELP ME GET HOME</div>':""}
+   <div class="profile-grid">
+    <div class="visual">${photo}<div class="photo-label">Verified PetLink identity</div><div class="visual-caption"><div class="overline">${esc(p.animal_type||"Beloved companion")}</div><h1>${esc(p.pet_name||"Pet")}</h1><p>${esc(p.breed||"")} ${p.city?"· "+esc(p.city):""}</p></div></div>
+    <div class="details">
+     <div class="serial"><span class="kicker">The Midnight Collection</span><span>Pet ID · ${esc(String(p.pet_id||id).slice(0,8))}</span></div>
+     <div class="identity"><div class="kicker">A life, beautifully connected</div><h2>Every detail tells their story.</h2><p>A little companion. An irreplaceable place in someone's world. This is their PetLink identity.</p></div>
+     <div class="facts">
+      <div class="fact"><small>Gender</small><strong>${esc(p.gender||"Not shared")}</strong></div>
+      <div class="fact"><small>Age</small><strong>${esc(age)}</strong></div>
+      <div class="fact"><small>Breed</small><strong>${esc(p.breed||"Not shared")}</strong></div>
+      <div class="fact"><small>Home city</small><strong>${esc(p.city||"Not shared")}</strong></div>
+     </div>
+     <div class="owner-box"><small>Their favourite human</small><p class="owner-name">${esc(p.owner_name||"Their human")}</p><p class="city">Always loved. Always missed.</p></div>
+    </div>
+   </div>
+   <section class="contact"><div class="contact-top"><div><div class="kicker">Have you found me?</div><h2>Let's get them home.</h2><p class="sub">One tap opens WhatsApp. Share your current location in the chat.</p></div><div style="font-size:30px" aria-hidden="true">⌖</div></div>${contact}</section>
+   <div class="extra-grid">
+    ${p.public_medical_notes?`<section class="extra"><h3>Care & comfort</h3><p>${esc(p.public_medical_notes)}</p></section>`:""}
+    ${p.notes?`<section class="extra"><h3>A little more</h3><p>${esc(p.notes)}</p></section>`:""}
+   </div>
+   <div class="bottomline"><div class="signature">“Home is wherever they are.”</div><div class="tools"><button class="tool" id="share">Share profile ↗</button><button class="tool" id="copy">Copy profile link</button></div></div>
+  </article>`;
+  document.getElementById("share").addEventListener("click",async()=>{try{if(navigator.share)await navigator.share({title:(p.pet_name||"Pet")+" · PetLink",text:"Meet "+(p.pet_name||"this pet")+".",url:location.href});else{await navigator.clipboard.writeText(location.href);document.getElementById("share").textContent="Copied ✓";}}catch(_){}});
+  document.getElementById("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(location.href);document.getElementById("copy").textContent="Copied ✓";}catch(_){window.prompt("Copy this profile link:",location.href);}});
+ }catch(err){app.innerHTML=`<div class="error"><h1 style="font:34px Georgia,serif;color:#f4f1e9">Profile unavailable</h1><p>${esc(err.message)}</p></div>`;}
+}
+const petId=new URLSearchParams(location.search).get("pet");if(petId)showPet(petId);else showForm();
 </script>
-</body></html>
+</body>
+</html>
